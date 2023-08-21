@@ -6,10 +6,12 @@
 
 ## Running
 - Run infra: ```docker-compose up -d```
+  - Check container status: ```docker ps -a```
+  - Check app logs: ```docker logs -f --details app-forum-api```
 - GET App topics: ```localhost/topicos```
 - Prometheus UI: ```localhost:9090```
 - Metrics: ```localhost/metrics```
-- 
+
 ## Pillars
 - Metrics
 - Distributed tracing
