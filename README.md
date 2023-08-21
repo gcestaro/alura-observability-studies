@@ -67,9 +67,12 @@ Service level indicator (SLI*) collected within a time series. Metrics are used 
     - total sum
     - count
 
-- Sample queries: 
+- [Sample queries](https://prometheus.io/docs/prometheus/latest/querying/basics/):
   - Stand vector: ```logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="info"}```
   - Range vector: ```logback_events_total[5m:30s]```
   - Scalar (can see graphs): ```hikaricp_connections_idle``` 
   - Count success auth: ```auth_user_success_total```
   - Success http requests with response time less than 50ms to "/topicos/{id}": ```http_server_requests_seconds_bucket{status="200", uri="/topicos/{id}", le="0.05"}```
+  - ```http_server_requests_seconds_count{application="app-forum-api", method=~"GET|POST", status=~"2..|3..", uri!~"/actuator/prometheus|/actuator/health"}```
+  - ```sum(increase(http_server_requests_seconds_count{application="app-forum-api", uri!~"/actuator/prometheus|/actuator/health"} [1m]))```
+  - ```irate(http_server_requests_seconds_count{application="app-forum-api", uri!~"/actuator/prometheus|/actuator/health"} [5m])```
