@@ -1,5 +1,15 @@
 # Observability Studies
 
+## Requisites:
+- Docker
+- docker-compose
+
+## Running
+- Run infra: ```docker-compose up -d```
+- GET App topics: ```localhost/topicos```
+- Prometheus UI: ```localhost:9090```
+- Metrics: ```localhost/metrics```
+- 
 ## Pillars
 - Metrics
 - Distributed tracing
@@ -44,7 +54,22 @@ Service level indicator (SLI*) collected within a time series. Metrics are used 
 ## Mac OS - M1 users
 - Set default platform linux/amd64: ```export DOCKER_DEFAULT_PLATFORM=linux/amd64```
 
-## Running
-- Run infra: ```docker-compose up -d```
-- GET App topics: ```localhost/topicos```
-- Prometheus UI: ```localhost:9090```
+## Prometheus
+- [Metric types](https://prometheus.io/docs/concepts/metric_types/):
+  - Counter: ascending cumulative counter. Resets when app restarts.
+  - Gauge: numerical values that usually vary (increment, decrement).
+  - [Histogram](https://prometheus.io/docs/practices/histograms/):
+    - cumulative counters for buckets
+    - total sum
+    - count of observed events
+  - Summary: similar to histogram, normally used for things like request duration and response sizes.
+    - streaming fi-quantiles
+    - total sum
+    - count
+
+- Sample queries: 
+  - Stand vector: ```logback_events_total{application="app-forum-api", instance="app-forum-api:8080", job="app-forum-api", level="info"}```
+  - Range vector: ```logback_events_total[5m:30s]```
+  - Scalar (can see graphs): ```hikaricp_connections_idle``` 
+  - Count success auth: ```auth_user_success_total```
+  - Success http requests with response time less than 50ms to "/topicos/{id}": ```http_server_requests_seconds_bucket{status="200", uri="/topicos/{id}", le="0.05"}```
