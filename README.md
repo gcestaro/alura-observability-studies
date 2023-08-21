@@ -43,3 +43,8 @@ Service level indicator (SLI*) collected within a time series. Metrics are used 
 
 ## Mac OS - M1 users
 - Set default platform linux/amd64: ```export DOCKER_DEFAULT_PLATFORM=linux/amd64```
+
+## Running
+- Run infra: ```docker-compose up -d```
+- GET App topics: ```localhost/topicos```
+- Prometheus UI: ```localhost:9090```
