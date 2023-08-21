@@ -1,10 +1,11 @@
-FROM openjdk:8-jdk-alpine
+FROM eclipse-temurin:8
 
-RUN addgroup -S spring && adduser -S spring -G spring
+#RUN addgroup --system spring && newgrp spring
+#RUN useradd -ms /bin/bash spring -g spring
 
-USER spring:spring
+#USER spring:spring
 
 ARG JAR_FILE=target/*jar
 COPY ${JAR_FILE} app.jar
 
-ENTRYPOINT ["java","-Xms128M","-Xmx128M","-XX:PermSize=64m","-XX:MaxPermSize=128m","-Dspring.profiles.active=prod","-jar","/app.jar"]
+CMD ["java","-Xms128M","-Xmx128M","-Dspring.profiles.active=prod","-jar","/app.jar"]
