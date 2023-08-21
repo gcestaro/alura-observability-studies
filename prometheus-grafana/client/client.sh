@@ -11,7 +11,7 @@ while true
     do
 	ENDP=`expr $RANDOM % 3 + 1`
 	NUMB=`expr $RANDOM % 100 + 1`
-	#TEMP=`expr 1 + $(awk -v seed="$RANDOM" 'BEGIN { srand(seed); printf("%.4f\n", rand()) }')`
+	TEMP=`expr 1 + $(awk -v seed="$RANDOM" 'BEGIN { srand(seed); printf("%.4f\n", rand()) }')`
         
 	if [ $NUMB -le 55 ]; then
 	    curl --silent --output /dev/null http://${HOST}/topicos
@@ -29,7 +29,7 @@ while true
 	    curl --silent --output /dev/null http://${HOST}/topicos/0
         fi
 
-	#sleep $TEMP
-	sleep 0.75
+	sleep $TEMP
+	#sleep 0.75
 done
 
